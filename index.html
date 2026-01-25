@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legacy Link | Dashboard</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand__logo">LL</div>
+        <div class="brand__text">
+          <span class="brand__name">Legacy Link</span>
+          <span class="brand__tagline">Future-first family finance</span>
+        </div>
+      </div>
+
+      <div class="topbar__right">
+        <nav class="topbar__nav">
+          <a href="about.html" class="topbar__link topbar__link--active">About</a>
+          <a href="contact.html" class="topbar__link">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard">
+      <!-- Plan Header -->
+      <section class="card card--hero">
+        <div class="hero__top">
+          <div class="hero__profile">
+            <div class="avatar avatar--large">A</div>
+            <div>
+              <p class="eyebrow">Legacy Plan for</p>
+              <h1 class="hero__title">Aiden Campher</h1>
+              <p class="hero__subtitle">
+                Education · First Home · First Investment Portfolio
+              </p>
+            </div>
+          </div>
+
+          <div class="hero__meta">
+            <p class="hero__unlock-label">Unlocks in</p>
+            <p class="hero__unlock-value">4 years, 3 months</p>
+            <span class="pill pill--soft">Target age: 18</span>
+          </div>
+        </div>
+
+        <div class="hero__grid">
+          <div class="hero__stat hero__stat--primary">
+            <p class="label">Current Value</p>
+            <p class="hero__amount">R152,480</p>
+            <p class="helper">
+              Projected at 18:
+              <span
+                class="helper--accent"
+                id="projectedAmount"
+                data-base-projection="278300"
+                data-base-monthly="900"
+              >
+                R278,300
+              </span>
+              <span class="chip chip--soft">Balanced Growth</span>
+            </p>
+          </div>
+
+          <div class="hero__stat">
+            <p class="label">Growth</p>
+            <p class="stat__value stat__value--positive">+7.8% this year</p>
+            <p class="helper">vs +6.2% benchmark</p>
+          </div>
+
+          <div class="hero__stat">
+            <p class="label">Contributions</p>
+            <p class="stat__value">
+              <span id="currentMonthlyDisplay">R900</span> / month
+            </p>
+            <p class="helper">Avg gifts: R200 / month</p>
+          </div>
+
+          <div class="hero__stat">
+            <p class="label">Protection</p>
+            <p class="stat__value">Active Coverage</p>
+            <p class="helper helper--accent">Education + Life Continuity</p>
+          </div>
+        </div>
+
+        <!-- Contribution slider -->
+        <div class="hero__contrib-controls">
+          <div class="hero__contrib-text">
+            <p class="label">Adjust monthly contribution (demo)</p>
+            <p class="hero__contrib-amount">
+              Drag to see projected value at 18 update in real time.
+            </p>
+          </div>
+          <div class="hero__contrib-slider">
+            <input
+              type="range"
+              min="300"
+              max="2500"
+              step="50"
+              value="900"
+              id="contributionSlider"
+            />
+            <div class="hero__contrib-scale">
+              <span>R300</span>
+              <span>R1,400</span>
+              <span>R2,500</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Plan Cards -->
+      <section class="section">
+        <div class="section__header">
+          <h2 class="section__title">Investment Plans</h2>
+          <div class="section__actions">
+            <button class="btn btn--ghost btn--sm" id="parentViewBtn">
+              Parent View
+            </button>
+            <button class="btn btn--outline btn--sm" id="toggleViewBtn">
+              Child View (18+)
+            </button>
+          </div>
+        </div>
+
+        <div class="plans-grid">
+          <!-- Education Plan -->
+          <article class="card plan-card">
+            <div class="plan-card__header">
+              <h3 class="plan-card__title">Education Plan</h3>
+              <span class="pill pill--blue">On Track</span>
+            </div>
+            <p class="plan-card__meta">Goal: R180,000</p>
+            <p class="plan-card__meta">Current: R92,400</p>
+
+            <div class="plan-card__progress">
+              <div class="progress-bar">
+                <div class="progress-bar__fill" style="width: 51%;"></div>
+              </div>
+              <span class="progress-bar__label">51% funded</span>
+            </div>
+
+            <div class="plan-card__footer">
+              <span class="chip">Mode: Balanced ETF</span>
+              <span class="chip chip--positive">Growth: +7.8%</span>
+            </div>
+          </article>
+
+          <!-- Housing Plan -->
+          <article class="card plan-card">
+            <div class="plan-card__header">
+              <h3 class="plan-card__title">First Home Fund</h3>
+              <span class="pill pill--amber">Slightly Behind</span>
+            </div>
+            <p class="plan-card__meta">Goal: R300,000</p>
+            <p class="plan-card__meta">Current: R51,700</p>
+
+            <div class="plan-card__progress">
+              <div class="progress-bar">
+                <div class="progress-bar__fill" style="width: 24%;"></div>
+              </div>
+              <span class="progress-bar__label">24% funded</span>
+            </div>
+
+            <div class="plan-card__footer">
+              <span class="chip">Mode: REIT + Bonds</span>
+              <span class="chip">Suggested: +R150 / month</span>
+            </div>
+          </article>
+
+          <!-- First Investment Portfolio -->
+          <article class="card plan-card plan-card--portfolio">
+            <div class="plan-card__header">
+              <h3 class="plan-card__title">First Investment Portfolio</h3>
+              <span class="pill pill--teal">Future Skills</span>
+            </div>
+            <p class="plan-card__meta">Current: R8,380</p>
+            <p class="plan-card__meta">Unlock: At 18</p>
+
+            <div class="plan-card__progress">
+              <div class="progress-bar progress-bar--soft">
+                <div class="progress-bar__fill" style="width: 18%;"></div>
+              </div>
+              <span class="progress-bar__label">Starter portfolio</span>
+            </div>
+
+            <div class="plan-card__footer">
+              <span class="chip">Risk: Aggressive</span>
+              <span class="chip chip--outline">
+                Teach Aiden to choose assets
+              </span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Family Contributors -->
+      <section class="section">
+        <div class="section__header">
+          <h2 class="section__title">Family Contributors</h2>
+          <button class="btn btn--ghost btn--sm">Manage invites</button>
+        </div>
+        <div class="contributors" id="contributorsList">
+          <div class="contributor">
+            <div class="avatar">M</div>
+            <p class="contributor__name">Mom</p>
+            <p class="contributor__detail">R900 / month</p>
+          </div>
+          <div class="contributor">
+            <div class="avatar">D</div>
+            <p class="contributor__name">Dad</p>
+            <p class="contributor__detail">Ad-hoc gifts</p>
+          </div>
+          <div class="contributor">
+            <div class="avatar">G</div>
+            <p class="contributor__name">Grandpa</p>
+            <p class="contributor__detail">R300 on birthdays</p>
+          </div>
+          <div class="contributor">
+            <div class="avatar">GM</div>
+            <p class="contributor__name">Godmother</p>
+            <p class="contributor__detail">One-time gifts</p>
+          </div>
+          <button class="contributor contributor--add" id="openContributorModalBtn">
+            <span class="contributor__plus">+</span>
+            <span class="contributor__name">Add contributor</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Protection & Guidance Row -->
+      <section class="section section--grid">
+        <!-- Protection -->
+        <article class="card protection-card">
+          <div class="section__header section__header--tight">
+            <h2 class="section__title">Protection Status</h2>
+          </div>
+          <ul class="protection-list">
+            <li class="protection-list__item">
+              <div>
+                <span class="status-dot status-dot--active"></span>
+                Parent Life Continuity
+              </div>
+              <span class="pill pill--soft">Active</span>
+            </li>
+            <li class="protection-list__item">
+              <div>
+                <span class="status-dot status-dot--active"></span>
+                Education Cover (R200k)
+              </div>
+              <span class="pill pill--soft">Active</span>
+            </li>
+            <li class="protection-list__item">
+              <div>
+                <span class="status-dot status-dot--inactive"></span>
+                Disability Continuity
+              </div>
+              <button class="link-btn">Explore upgrade</button>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Guidance -->
+        <article class="card guidance-card">
+          <div class="section__header section__header--tight">
+            <h2 class="section__title">Guidance & Tips</h2>
+          </div>
+          <div class="guidance-grid">
+            <button class="guidance-tile">
+              <span class="guidance-tile__icon">📈</span>
+              <span class="guidance-tile__title">Boost contributions</span>
+              <span class="guidance-tile__body">
+                Increase by R150 / month to fully fund education by 18.
+              </span>
+            </button>
+            <button class="guidance-tile">
+              <span class="guidance-tile__icon">📚</span>
+              <span class="guidance-tile__title">Teach compound interest</span>
+              <span class="guidance-tile__body">
+                A 5-minute story Aiden can understand today.
+              </span>
+            </button>
+          </div>
+        </article>
+      </section>
+
+      <!-- Milestones / Activity -->
+      <section class="section">
+        <div class="section__header">
+          <h2 class="section__title">Upcoming Milestones & Activity</h2>
+        </div>
+        <div class="card feed-card">
+          <div class="milestones">
+            <span class="milestone-pill milestone-pill--gold">
+              🎓 Financial literacy unlocked
+            </span>
+            <span class="milestone-pill milestone-pill--green">
+              📊 Portfolio access at 18
+            </span>
+            <span class="milestone-pill milestone-pill--home">
+              🏠 First home fund at 21
+            </span>
+          </div>
+
+          <ul class="activity-list">
+            <li class="activity-list__item">
+              <span>
+                🎁 Grandpa contributed <strong>R500</strong> for Aiden's birthday.
+              </span>
+              <span class="activity-list__time">2 days ago</span>
+            </li>
+            <li class="activity-list__item">
+              <span>
+                📈 Investment portfolio up <strong>4%</strong> this month.
+              </span>
+              <span class="activity-list__time">This week</span>
+            </li>
+            <li class="activity-list__item">
+              <span>
+                🔒 Education insurance activated for 2026.
+              </span>
+              <span class="activity-list__time">This month</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="bottom-nav__item bottom-nav__item--active">
+        <span>🏠</span>
+        <span>Dashboard</span>
+      </button>
+      <button class="bottom-nav__item">
+        <span>📈</span>
+        <span>Growth</span>
+      </button>
+      <button class="bottom-nav__item">
+        <span>📚</span>
+        <span>Learn</span>
+      </button>
+      <button class="bottom-nav__item">
+        <span>⋯</span>
+        <span>More</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Add Contributor Modal -->
+  <div class="modal" id="contributorModal" aria-hidden="true">
+    <div class="modal__backdrop" id="modalBackdrop"></div>
+    <div class="modal__content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal__header">
+        <h2 class="modal__title" id="modalTitle">Add contributor</h2>
+        <button class="modal__close" id="closeContributorModalBtn" aria-label="Close">
+          ✕
+        </button>
+      </div>
+      <form class="modal__body" id="contributorForm">
+        <div class="modal__field">
+          <label for="contribName">Name</label>
+          <input type="text" id="contribName" required placeholder="e.g. Aunt Sarah" />
+        </div>
+        <div class="modal__field">
+          <label for="contribRelationship">Relationship</label>
+          <input
+            type="text"
+            id="contribRelationship"
+            placeholder="e.g. Aunt / Grandpa / Godparent"
+          />
+        </div>
+        <div class="modal__field">
+          <label for="contribDetail">Contribution pattern</label>
+          <input
+            type="text"
+            id="contribDetail"
+            placeholder="e.g. R250 on birthdays"
+          />
+        </div>
+        <p class="modal__hint">
+          In production this would send an invite link or QR code. For this demo
+          we simply add them to the family view.
+        </p>
+        <div class="modal__footer">
+          <button type="button" class="btn btn--ghost btn--sm" id="cancelContributorBtn">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn--outline btn--sm">
+            Add contributor
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legacy Link | Contact</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand__logo">LL</div>
+        <div class="brand__text">
+          <span class="brand__name">Legacy Link</span>
+          <span class="brand__tagline">Future-first family finance</span>
+        </div>
+      </div>
+
+      <div class="topbar__right">
+        <nav class="topbar__nav">
+          <a href="index.html" class="topbar__link">Dashboard</a>
+          <a href="about.html" class="topbar__link">About</a>
+          <a href="contact.html" class="topbar__link topbar__link--active">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="page-main">
+      <!-- Hero -->
+      <section class="card page-hero">
+        <p class="page-hero__eyebrow">Contact</p>
+        <h1 class="page-hero__title">Let’s talk about Legacy Link</h1>
+        <p class="page-hero__subtitle">
+          Whether you’re exploring new family products, innovation partnerships or a pilot,
+          I’d love to connect and unpack how Legacy Link could work with your ecosystem.
+        </p>
+      </section>
+
+      <!-- Founder info + form -->
+      <section class="section">
+        <div class="contact-grid">
+          <!-- Founder / details -->
+          <article class="card">
+            <div style="display:flex; align-items:center; gap:0.9rem;">
+              <div class="avatar avatar--large">S</div>
+              <div>
+                <p class="founder-card__name">Mzwake & Samantha-Megan Campher</p>
+                <p class="founder-card__role">Concept Founders · Legacy Link</p>
+              </div>
+            </div>
+
+            <p class="founder-card__body">
+              We are South African digital creators and problem-solvers with a focus on
+              practical technology that serves families and the next generation. Legacy Link
+              was born from a desire to turn “generational wealth” into something concrete,
+              accessible and educational for real children and real parents.
+            </p>
+
+            <ul class="contact-detail-list">
+              <li>
+                Email:
+                <a href="sammegcampher@gmail.com">sammegcampher@gmail.com</a>
+              </li>
+              <li>Location: Gqeberha, South Africa</li>
+              
+            </ul>
+          </article>
+
+          <!-- Contact form -->
+          <article class="card">
+            <h2 class="section__title">Share your interest</h2>
+        
+              class="contact-form"
+              action="mailto:hello@your-email.com"
+              method="post"
+              enctype="text/plain"
+            >
+              <div class="contact-form__field">
+                <label for="name">Your name</label>
+                <input type="text" id="name" name="Name" required />
+              </div>
+
+              <div class="contact-form__field">
+                <label for="org">Organisation</label>
+                <input type="text" id="org" name="Organisation" />
+              </div>
+
+              <div class="contact-form__field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="Email" required />
+              </div>
+
+              <div class="contact-form__field">
+                <label for="role">Role / area of focus</label>
+                <input
+                  type="text"
+                  id="role"
+                  name="Role"
+                  placeholder="e.g. Product, Innovation, Retail Banking, Insurance"
+                />
+              </div>
+
+              <div class="contact-form__field">
+                <label for="message">How can Legacy Link help you?</label>
+                <textarea
+                  id="message"
+                  name="Message"
+                  placeholder="Tell me a bit about your team, customers and what you’d like to explore."
+                ></textarea>
+              </div>
+
+              <p class="contact-form__hint">
+                Submitting will open your default email client with these details pre-filled,
+                so you can review and send.
+              </p>
+
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--outline btn--sm">
+                  Send email
+                </button>
+              </div>
+            </form>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="bottom-nav__item">
+        <span>🏠</span>
+        <span>Dashboard</span>
+      </button>
+      <button class="bottom-nav__item">
+        <span>ℹ️</span>
+        <span>About</span>
+      </button>
+      <button class="bottom-nav__item bottom-nav__item--active">
+        <span>✉️</span>
+        <span>Contact</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
