@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legacy Link | Secure Access</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050b18;
+      --bg-soft: #0b1220;
+      --card: #111827;
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.16);
+      --accent-strong: #4ade80;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.45);
+      --danger: #f97373;
+      --shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.9);
+      --radius-lg: 24px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .auth-shell {
+      width: 100%;
+      max-width: 1040px;
+      background: radial-gradient(circle at top left, #111827, #020617 60%);
+      border-radius: 30px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      overflow: hidden;
+      position: relative;
+      isolation: isolate;
+    }
+
+    @media (max-width: 880px) {
+      .auth-shell {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .auth-aside {
+        display: none;
+      }
+    }
+
+    .auth-main {
+      padding: 2.1rem 2.6rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 640px) {
+      .auth-main {
+        padding: 1.6rem 1.4rem;
+      }
+    }
+
+    .auth-logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .brand__logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 20% 0, #38bdf8, #0ea5e9, #1d4ed8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #f9fafb;
+      box-shadow: 0 14px 26px rgba(37, 99, 235, 0.7);
+      font-size: 0.85rem;
+    }
+
+    .brand__text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand__name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .brand__tagline {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .auth-tagline-pill {
+      padding: 0.35rem 0.7rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #bbf7d0, #22c55e 55%, #166534);
+      box-shadow: 0 0 14px rgba(34, 197, 94, 0.9);
+    }
+
+    .auth-heading-block {
+      margin: 1.4rem 0 1.3rem;
+    }
+
+    .auth-title {
+      margin: 0 0 0.5rem;
+      font-size: 1.8rem;
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      font-family: "Playfair Display", serif;
+    }
+
+    .auth-subtitle {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 360px;
+    }
+
+    .auth-subtitle span {
+      color: var(--accent-strong);
+      font-weight: 500;
+    }
+
+    .auth-tabs {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      margin-bottom: 1.3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .auth-tab {
+      position: relative;
+      z-index: 1;
+      padding: 0.45rem 1.4rem;
+      border-radius: var(--radius-pill);
+      border: none;
+      background: transparent;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-weight: 500;
+      transition: color var(--transition-fast);
+    }
+
+    .auth-tab span.icon {
+      font-size: 1rem;
+    }
+
+    .auth-tab.active {
+      color: #f9fafb;
+    }
+
+    .auth-tab-highlight {
+      position: absolute;
+      top: 3px;
+      bottom: 3px;
+      width: 50%;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #22c1c3, #0ea5e9, #6366f1);
+      transition: transform 0.24s ease-out;
+      z-index: 0;
+    }
+
+    .auth-tab-highlight.login {
+      transform: translateX(0%);
+    }
+
+    .auth-tab-highlight.register {
+      transform: translateX(100%);
+    }
+
+    .error-banner {
+      margin-top: 0.2rem;
+      border-radius: 10px;
+      padding: 0.4rem 0.6rem;
+      background: rgba(248, 113, 113, 0.07);
+      border: 1px solid rgba(248, 113, 113, 0.5);
+      color: #fecaca;
+      font-size: 0.75rem;
+      display: none;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .error-banner.visible {
+      display: flex;
+    }
+
+    .error-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #f97373;
+    }
+
+    .auth-form-wrapper {
+      margin-top: 0.85rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .field-row {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 640px) {
+      .field-row {
+        flex-direction: column;
+      }
+    }
+
+    .field {
+      flex: 1;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .field label span.req {
+      color: var(--accent-strong);
+      margin-left: 0.1rem;
+    }
+
+    .input-shell {
+      position: relative;
+    }
+
+    .input-shell input,
+    .input-shell select {
+      width: 100%;
+      padding: 0.72rem 0.9rem;
+      border-radius: 11px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: radial-gradient(circle at top left, #020617, #020617f0);
+      color: var(--text-main);
+      font-size: 0.82rem;
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
+        background var(--transition-fast);
+    }
+
+    .input-shell input::placeholder {
+      color: #6b7280;
+    }
+
+    .input-shell input:focus,
+    .input-shell select:focus {
+      border-color: var(--accent-strong);
+      box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.4);
+      background: #020617;
+    }
+
+    .input-note {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 0.1rem;
+    }
+
+    .inline-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+      margin-top: 0.15rem;
+    }
+
+    .link-muted {
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 0.75rem;
+    }
+
+    .link-muted:hover {
+      text-decoration: underline;
+    }
+
+    .checkbox-shell {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+    }
+
+    .checkbox-shell input {
+      width: 14px;
+      height: 14px;
+      accent-color: var(--accent);
+    }
+
+    .checkbox-shell a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    .checkbox-shell a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-primary {
+      margin-top: 0.3rem;
+      padding: 0.75rem 1.2rem;
+      border-radius: var(--radius-pill);
+      border: none;
+      background: linear-gradient(135deg, #22c1c3, #0ea5e9, #6366f1);
+      color: #f9fafb;
+      font-weight: 600;
+      font-size: 0.86rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.9);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+        filter var(--transition-fast);
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow: 0 24px 50px rgba(37, 99, 235, 0.8);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 14px 26px rgba(15, 23, 42, 0.95);
+    }
+
+    .btn-secondary-text {
+      margin-top: 0.55rem;
+      font-size: 0.78rem;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .btn-secondary-text button {
+      border: none;
+      background: transparent;
+      color: #38bdf8;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .btn-secondary-text button:hover {
+      text-decoration: underline;
+    }
+
+    .foot-note {
+      margin-top: 1rem;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* Aside */
+
+    .auth-aside {
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.24), transparent 58%),
+                  radial-gradient(circle at bottom, rgba(34, 197, 94, 0.18), transparent 60%),
+                  #020617;
+      padding: 2.1rem 2.2rem;
+      border-left: 1px solid rgba(148, 163, 184, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.95);
+      margin-bottom: 1.1rem;
+    }
+
+    .badge-pill span.icon {
+      font-size: 0.9rem;
+    }
+
+    .aside-title {
+      margin: 0 0 0.5rem;
+      font-size: 1.35rem;
+      line-height: 1.2;
+      font-family: "Playfair Display", serif;
+    }
+
+    .aside-body {
+      margin: 0 0 1.5rem;
+      font-size: 0.84rem;
+      color: #e5e7eb;
+      max-width: 280px;
+    }
+
+    .aside-body span {
+      color: var(--accent-strong);
+      font-weight: 500;
+    }
+
+    .stat-card {
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: radial-gradient(circle at top left, #111827, #020617);
+      padding: 0.9rem 1rem;
+      max-width: 260px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .stat-main {
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .stat-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      gap: 0.5rem;
+    }
+
+    .stat-chip {
+      padding: 0.24rem 0.6rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(52, 211, 153, 0.6);
+      background: rgba(22, 163, 74, 0.18);
+      color: #bbf7d0;
+      font-size: 0.7rem;
+    }
+
+    .stat-pill {
+      margin-top: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.72rem;
+      color: #e5e7eb;
+    }
+
+    .stat-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 14px rgba(34, 197, 94, 0.9);
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(30px);
+      opacity: 0.9;
+    }
+
+    .orb.one {
+      width: 160px;
+      height: 160px;
+      background: rgba(56, 189, 248, 0.36);
+      top: -45px;
+      right: -45px;
+    }
+
+    .orb.two {
+      width: 140px;
+      height: 140px;
+      background: rgba(34, 197, 94, 0.34);
+      bottom: -55px;
+      left: -35px;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-shell">
+    <!-- MAIN -->
+    <div class="auth-main">
+      <div class="auth-logo-row">
+        <div class="brand">
+          <div class="brand__logo">LL</div>
+          <div class="brand__text">
+            <span class="brand__name">Legacy Link</span>
+            <span class="brand__tagline">Future-first family finance</span>
+          </div>
+        </div>
+
+        <div class="auth-tagline-pill">
+          <span class="pill-dot"></span>
+          LIVE LEGACY ACCESS
+        </div>
+      </div>
+
+      <div class="auth-heading-block">
+        <h1 class="auth-title">
+          Sign in to your Legacy Command Centre.
+        </h1>
+        <p class="auth-subtitle">
+          One secure login for your <span>family playbook</span> — accounts, wishes, and continuity in one place.
+        </p>
+      </div>
+
+      <div class="auth-tabs">
+        <div class="auth-tab-highlight login" id="tabHighlight"></div>
+
+        <button class="auth-tab active" data-view="login" id="loginTab">
+          <span class="icon">🔐</span>
+          Sign in
+        </button>
+
+        <button class="auth-tab" data-view="register" id="registerTab">
+          <span class="icon">✨</span>
+          Create account
+        </button>
+      </div>
+
+      <div class="error-banner" id="errorBanner">
+        <span class="error-dot"></span>
+        <span id="errorText"></span>
+      </div>
+
+      <div class="auth-form-wrapper">
+        <!-- LOGIN FORM -->
+        <form id="loginForm">
+          <div class="field">
+            <label for="loginEmail">Email address<span class="req">*</span></label>
+            <div class="input-shell">
+              <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="loginPassword">Password<span class="req">*</span></label>
+            <div class="input-shell">
+              <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password" required />
+            </div>
+            <div class="inline-row">
+              <span class="input-note">Use the same details you registered with for this demo.</span>
+              <a href="#" class="link-muted" onclick="alert('In a full build this would start a password reset flow. For the prototype, you can simply register a new account.'); return false;">Forgot?</a>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            Continue to Dashboard
+          </button>
+
+          <p class="btn-secondary-text">
+            New to Legacy Link?
+            <button type="button" id="switchToRegister">Create an account</button>
+          </p>
+        </form>
+
+        <!-- REGISTER FORM -->
+        <form id="registerForm" style="display:none;">
+          <div class="field-row">
+            <div class="field">
+              <label for="regName">Full name<span class="req">*</span></label>
+              <div class="input-shell">
+                <input type="text" id="regName" placeholder="First & last name" autocomplete="name" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="regRole">I’m using Legacy Link as</label>
+              <div class="input-shell">
+                <select id="regRole">
+                  <option value="individual">Individual</option>
+                  <option value="family">Family organiser</option>
+                  <option value="advisor">Advisor / Planner</option>
+                </select>
+              </div>
+              <p class="input-note">This helps personalise the dashboard later in development.</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="regEmail">Email address<span class="req">*</span></label>
+            <div class="input-shell">
+              <input type="email" id="regEmail" placeholder="you@example.com" autocomplete="email" required />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="regPassword">Password<span class="req">*</span></label>
+              <div class="input-shell">
+                <input type="password" id="regPassword" placeholder="Minimum 6 characters" autocomplete="new-password" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="regPasswordConfirm">Confirm password<span class="req">*</span></label>
+              <div class="input-shell">
+                <input type="password" id="regPasswordConfirm" placeholder="Re-enter password" required />
+              </div>
+            </div>
+          </div>
+
+          <div class="inline-row">
+            <div class="checkbox-shell">
+              <input type="checkbox" id="regTerms" />
+              <span>I accept the <a href="#">Terms</a> &amp; <a href="#">Privacy</a>.</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            Create Legacy Link Account
+          </button>
+
+          <p class="btn-secondary-text">
+            Already have an account?
+            <button type="button" id="switchToLogin">Sign in instead</button>
+          </p>
+        </form>
+      </div>
+
+      <p class="foot-note">
+        Prototype note: accounts are stored only in your browser (localStorage). In a live bank build, this would sit behind regulated, encrypted authentication.
+      </p>
+    </div>
+
+    <!-- ASIDE -->
+    <aside class="auth-aside">
+      <div class="orb one"></div>
+      <div class="orb two"></div>
+
+      <div class="badge-pill">
+        <span class="icon">🧬</span>
+        GENERATIONAL BLUEPRINT
+      </div>
+
+      <h2 class="aside-title">
+        “If anything happens to me… they’ll know exactly what to do.”
+      </h2>
+
+      <p class="aside-body">
+        Legacy Link turns scattered accounts, notes and “I’ll explain one day” into a living family <span>playbook</span> — secure contacts, instructions and wishes your loved ones can actually find and follow.
+      </p>
+
+      <div class="stat-card">
+        <div class="stat-label">Simulated Snapshot</div>
+        <div class="stat-main">R2.4m family estate mapped</div>
+        <div class="stat-foot">
+          <span>3 banks · 2 policies · 1 view</span>
+          <span class="stat-chip">+100% clarity</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-dot"></span>
+          “No more guessing. No more ‘I think she said…’”
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // ===== CONFIG =====
+    // Set this to your dashboard page filename:
+    // e.g. "index.html" or "dashboard.html"
+    const REDIRECT_URL = "index.html"; // <-- change if needed
+
+    // ===== ELEMENTS =====
+    const loginTab = document.getElementById("loginTab");
+    const registerTab = document.getElementById("registerTab");
+    const tabHighlight = document.getElementById("tabHighlight");
+
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+
+    const switchToRegister = document.getElementById("switchToRegister");
+    const switchToLogin = document.getElementById("switchToLogin");
+
+    const errorBanner = document.getElementById("errorBanner");
+    const errorText = document.getElementById("errorText");
+
+    // ===== TAB HANDLING =====
+    function setView(view) {
+      const isLogin = view === "login";
+
+      loginTab.classList.toggle("active", isLogin);
+      registerTab.classList.toggle("active", !isLogin);
+
+      loginForm.style.display = isLogin ? "flex" : "none";
+      registerForm.style.display = isLogin ? "none" : "flex";
+
+      tabHighlight.classList.toggle("login", isLogin);
+      tabHighlight.classList.toggle("register", !isLogin);
+
+      clearError();
+    }
+
+    loginTab.addEventListener("click", () => setView("login"));
+    registerTab.addEventListener("click", () => setView("register"));
+    switchToRegister.addEventListener("click", () => setView("register"));
+    switchToLogin.addEventListener("click", () => setView("login"));
+
+    // ===== ERROR HANDLING =====
+    function showError(message) {
+      errorText.textContent = message;
+      errorBanner.classList.add("visible");
+    }
+
+    function clearError() {
+      errorBanner.classList.remove("visible");
+      errorText.textContent = "";
+    }
+
+    // ===== LOCAL STORAGE "AUTH" =====
+    function getUsers() {
+      try {
+        const raw = localStorage.getItem("legacyLinkUsers");
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        console.error("Error parsing users", e);
+        return [];
+      }
+    }
+
+    function saveUsers(users) {
+      try {
+        localStorage.setItem("legacyLinkUsers", JSON.stringify(users));
+      } catch (e) {
+        console.error("Error saving users", e);
+      }
+    }
+
+    function findUserByEmail(email) {
+      const users = getUsers();
+      return users.find(
+        (u) => u.email.toLowerCase() === email.toLowerCase()
+      );
+    }
+
+    // ===== REGISTER FLOW =====
+    registerForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      clearError();
+
+      const name = document.getElementById("regName").value.trim();
+      const role = document.getElementById("regRole").value;
+      const email = document.getElementById("regEmail").value.trim();
+      const password = document.getElementById("regPassword").value;
+      const confirmPassword = document.getElementById("regPasswordConfirm").value;
+      const termsChecked = document.getElementById("regTerms").checked;
+
+      if (!name || !email || !password || !confirmPassword) {
+        showError("Please fill in all required fields.");
+        return;
+      }
+
+      if (!termsChecked) {
+        showError("Please accept the Terms & Privacy to continue.");
+        return;
+      }
+
+      if (password.length < 6) {
+        showError("Use a password with at least 6 characters for this demo.");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        showError("Passwords don’t match. Please double-check and try again.");
+        return;
+      }
+
+      const existing = findUserByEmail(email);
+      if (existing) {
+        showError("An account already exists with that email. Try signing in instead.");
+        return;
+      }
+
+      const users = getUsers();
+      const newUser = {
+        id: Date.now().toString(),
+        name,
+        role,
+        email,
+        password // NOTE: plain text only for this prototype.
+      };
+
+      users.push(newUser);
+      saveUsers(users);
+
+      // Store current session (used by dashboard)
+      sessionStorage.setItem(
+        "legacyLinkCurrentUser",
+        JSON.stringify({
+          id: newUser.id,
+          name: newUser.name,
+          email: newUser.email,
+          role: newUser.role
+        })
+      );
+
+      // mark as fresh signup for onboarding
+      sessionStorage.setItem("legacyLinkIsFresh", "1");
+
+      window.location.href = REDIRECT_URL;
+    });
+
+    // ===== LOGIN FLOW =====
+    loginForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      clearError();
+
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value;
+
+      if (!email || !password) {
+        showError("Please enter both email and password.");
+        return;
+      }
+
+      const user = findUserByEmail(email);
+      if (!user || user.password !== password) {
+        showError("We couldn’t find a matching account. Check your details or register a new profile.");
+        return;
+      }
+
+      sessionStorage.setItem(
+        "legacyLinkCurrentUser",
+        JSON.stringify({
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role
+        })
+      );
+
+      // Login is not "fresh", so we don't set the onboarding flag
+      window.location.href = REDIRECT_URL;
+    });
+
+    // Autofocus for nicer UX
+    window.addEventListener("load", () => {
+      const emailInput = document.getElementById("loginEmail");
+      if (emailInput) emailInput.focus();
+    });
+  </script>
+</body>
+</html>

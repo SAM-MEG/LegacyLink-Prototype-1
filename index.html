@@ -23,12 +23,32 @@
         </div>
       </div>
 
-      <div class="topbar__right">
-        <nav class="topbar__nav">
-          <a href="about.html" class="topbar__link topbar__link--active">About</a>
-          <a href="contact.html" class="topbar__link">Contact</a>
-        </nav>
+       <div class="topbar__right">
+    <nav class="topbar__nav">
+      <a href="about.html" class="topbar__link topbar__link--active">About</a>
+      <a href="contact.html" class="topbar__link">Contact</a>
+    </nav>
+
+    <!-- Profile pill (uses logged-in user) -->
+    <div class="ll-profile" id="llProfileToggle">
+      <div class="ll-profile-avatar">LL</div>
+      <div class="ll-profile-meta">
+        <span class="ll-profile-label">Welcome back,</span>
+        <span class="ll-profile-name-row">
+          <span class="ll-profile-name">Legacy Member</span>
+          <span class="ll-profile-role">Legacy Member</span>
+        </span>
       </div>
+      <span class="ll-profile-caret">▾</span>
+
+      <div class="ll-profile-menu" id="llProfileMenu">
+        <button type="button" data-action="view-profile">View profile</button>
+        <button type="button" data-action="switch-user">Switch profile</button>
+        <button type="button" class="danger" data-action="logout">Sign out</button>
+      </div>
+    </div>
+  </div>
+
     </header>
 
     <!-- Main Content -->
