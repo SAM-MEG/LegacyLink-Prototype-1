@@ -572,7 +572,7 @@
           Sign in to your Legacy Command Centre.
         </h1>
         <p class="auth-subtitle">
-          One secure login for your <span>family playbook</span> — accounts, wishes, and continuity in one place.
+          One secure login for your <span>family playbook</span>, accounts, wishes, and continuity in one place.
         </p>
       </div>
 
@@ -730,7 +730,7 @@
     // ===== CONFIG =====
     // Set this to your dashboard page filename:
     // e.g. "index.html" or "dashboard.html"
-    const REDIRECT_URL = "index.html"; // <-- change if needed
+    const REDIRECT_URL = "index.html"; 
 
     // ===== ELEMENTS =====
     const loginTab = document.getElementById("loginTab");
@@ -854,7 +854,7 @@
       users.push(newUser);
       saveUsers(users);
 
-      // Store current session (used by dashboard)
+      // Store current session 
       sessionStorage.setItem(
         "legacyLinkCurrentUser",
         JSON.stringify({
@@ -900,7 +900,7 @@
         })
       );
 
-      // Login is not "fresh", so we don't set the onboarding flag
+      //  don't set onboarding flag
       window.location.href = REDIRECT_URL;
     });
 
