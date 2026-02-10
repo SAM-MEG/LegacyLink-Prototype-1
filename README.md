@@ -19,5 +19,5 @@ Created as a proof-of-concept to demonstrate product thinking, UX planning, and 
 This prototype was designed specifically for pitching and early-stage concept validation.
 
 
-## 👩‍💻 Author
+##  Author
 Samantha-Megan Campher
