@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const userRaw = sessionStorage.getItem("legacyLinkCurrentUser");
 
   if (!userRaw) {
-    // For the prototype, send users back to auth if they aren't "logged in"
     window.location.href = "auth.html";
     return;
   }
@@ -75,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ===== Onboarding checklist (first-time only) =====
+  // ===== Onboarding checklist =====
   const onboardingEl = document.getElementById("llOnboarding");
   const onboardingDismiss = document.getElementById("llOnboardingDismiss");
   const isFresh = sessionStorage.getItem("legacyLinkIsFresh") === "1";
@@ -171,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ===== Add contributor modal & demo add =====
+  // ===== contributor modal & demo add =====
   const openModalBtn = document.getElementById("openContributorModalBtn");
   const modal = document.getElementById("contributorModal");
   const modalBackdrop = document.getElementById("modalBackdrop");
