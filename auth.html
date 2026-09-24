@@ -629,63 +629,189 @@
         <!-- REGISTER FORM -->
         <form id="registerForm" style="display:none;">
           <div class="field-row">
-            <div class="field">
-              <label for="regName">Full name<span class="req">*</span></label>
-              <div class="input-shell">
-                <input type="text" id="regName" placeholder="First & last name" autocomplete="name" required />
-              </div>
-            </div>
-            <div class="field">
-              <label for="regRole">I’m using Legacy Link as</label>
-              <div class="input-shell">
-                <select id="regRole">
-                  <option value="individual">Individual</option>
-                  <option value="family">Family organiser</option>
-                  <option value="advisor">Advisor / Planner</option>
-                </select>
-              </div>
-              <p class="input-note">This helps personalise the dashboard later in development.</p>
-            </div>
-          </div>
+        <!-- REGISTER FORM -->
+<form id="registerForm" style="display:none;">
 
-          <div class="field">
-            <label for="regEmail">Email address<span class="req">*</span></label>
-            <div class="input-shell">
-              <input type="email" id="regEmail" placeholder="you@example.com" autocomplete="email" required />
-            </div>
-          </div>
+  <!-- STEP 1: ABOUT YOU -->
+  <div class="onboarding-step">
+    <div class="step-heading">
+      <span class="step-number">1</span>
+      <div>
+        <strong>About you</strong>
+        <p>Tell us a little about the person creating this Legacy Plan.</p>
+      </div>
+    </div>
 
-          <div class="field-row">
-            <div class="field">
-              <label for="regPassword">Password<span class="req">*</span></label>
-              <div class="input-shell">
-                <input type="password" id="regPassword" placeholder="Minimum 6 characters" autocomplete="new-password" required />
-              </div>
-            </div>
-            <div class="field">
-              <label for="regPasswordConfirm">Confirm password<span class="req">*</span></label>
-              <div class="input-shell">
-                <input type="password" id="regPasswordConfirm" placeholder="Re-enter password" required />
-              </div>
-            </div>
-          </div>
+    <div class="field">
+      <label for="regName">
+        Full name<span class="req">*</span>
+      </label>
+      <div class="input-shell">
+        <input
+          type="text"
+          id="regName"
+          placeholder="First & last name"
+          autocomplete="name"
+          required
+        />
+      </div>
+    </div>
 
-          <div class="inline-row">
-            <div class="checkbox-shell">
-              <input type="checkbox" id="regTerms" />
-              <span>I accept the <a href="#">Terms</a> &amp; <a href="#">Privacy</a>.</span>
-            </div>
-          </div>
+    <div class="field">
+      <label for="regRole">I’m using Legacy Link as</label>
+      <div class="input-shell">
+        <select id="regRole">
+          <option value="individual">Individual</option>
+          <option value="family">Family organiser</option>
+          <option value="advisor">Advisor / Planner</option>
+        </select>
+      </div>
+    </div>
 
-          <button type="submit" class="btn-primary">
-            Create Legacy Link Account
-          </button>
+    <div class="field">
+      <label for="regEmail">
+        Email address<span class="req">*</span>
+      </label>
+      <div class="input-shell">
+        <input
+          type="email"
+          id="regEmail"
+          placeholder="you@example.com"
+          autocomplete="email"
+          required
+        />
+      </div>
+    </div>
 
-          <p class="btn-secondary-text">
-            Already have an account?
-            <button type="button" id="switchToLogin">Sign in instead</button>
-          </p>
-        </form>
+    <div class="field-row">
+      <div class="field">
+        <label for="regPassword">
+          Password<span class="req">*</span>
+        </label>
+        <div class="input-shell">
+          <input
+            type="password"
+            id="regPassword"
+            placeholder="Minimum 6 characters"
+            autocomplete="new-password"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="regPasswordConfirm">
+          Confirm password<span class="req">*</span>
+        </label>
+        <div class="input-shell">
+          <input
+            type="password"
+            id="regPasswordConfirm"
+            placeholder="Re-enter password"
+            required
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: LEGACY PLAN -->
+  <div class="onboarding-step">
+    <div class="step-heading">
+      <span class="step-number">2</span>
+      <div>
+        <strong>Build your Legacy Plan</strong>
+        <p>Start with the person and goal your plan is designed around.</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="regBeneficiary">
+        Beneficiary / child name<span class="req">*</span>
+      </label>
+      <div class="input-shell">
+        <input
+          type="text"
+          id="regBeneficiary"
+          placeholder="e.g. Cayden Campher"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="regRelationship">
+          Relationship<span class="req">*</span>
+        </label>
+        <div class="input-shell">
+          <select id="regRelationship" required>
+            <option value="">Select relationship</option>
+            <option value="child">Child</option>
+            <option value="grandchild">Grandchild</option>
+            <option value="niece-nephew">Niece / Nephew</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="regDob">
+          Date of birth<span class="req">*</span>
+        </label>
+        <div class="input-shell">
+          <input
+            type="date"
+            id="regDob"
+            required
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="regGoal">
+        Primary legacy goal<span class="req">*</span>
+      </label>
+      <div class="input-shell">
+        <select id="regGoal" required>
+          <option value="">Choose a goal</option>
+          <option value="education">Education</option>
+          <option value="first-home">First Home</option>
+          <option value="investment">First Investment Portfolio</option>
+          <option value="financial-foundation">Financial Foundation</option>
+          <option value="multiple">Multiple Goals</option>
+        </select>
+      </div>
+      <p class="input-note">
+        You can add more goals from your dashboard later.
+      </p>
+    </div>
+  </div>
+
+  <!-- TERMS -->
+  <div class="inline-row">
+    <div class="checkbox-shell">
+      <input type="checkbox" id="regTerms" required />
+      <span>
+        I accept the <a href="#">Terms</a> &amp;
+        <a href="#">Privacy</a>.
+      </span>
+    </div>
+  </div>
+
+  <button type="submit" class="btn-primary">
+    Create Legacy Plan →
+  </button>
+
+  <p class="btn-secondary-text">
+    Already have an account?
+    <button type="button" id="switchToLogin">
+      Sign in instead
+    </button>
+  </p>
+
+</form>
       </div>
 
       <p class="foot-note">
