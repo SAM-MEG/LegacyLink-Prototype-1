@@ -897,8 +897,7 @@
 
   <script>
     // ===== CONFIG =====
-    // Set this to your dashboard page filename:
-    // e.g. "index.html" or "dashboard.html"
+    
     const REDIRECT_URL = "index.html"; 
 
     // ===== ELEMENTS =====
@@ -973,82 +972,120 @@
       );
     }
 
-    // ===== REGISTER FLOW =====
-    registerForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      clearError();
+    
+      // ===== REGISTER FLOW =====
+registerForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  clearError();
 
-      const name = document.getElementById("regName").value.trim();
-      const role = document.getElementById("regRole").value;
-      const email = document.getElementById("regEmail").value.trim();
-      const password = document.getElementById("regPassword").value;
-      const confirmPassword = document.getElementById("regPasswordConfirm").value;
-      const termsChecked = document.getElementById("regTerms").checked;
+  // Basic account information
+  const name = document.getElementById("regName").value.trim();
+  const role = document.getElementById("regRole").value;
+  const email = document.getElementById("regEmail").value.trim();
+  const password = document.getElementById("regPassword").value;
+  const confirmPassword =
+    document.getElementById("regPasswordConfirm").value;
 
-      if (
-  !name ||
-  !email ||
-  !password ||
-  !confirmPassword ||
-  !beneficiary ||
-  !relationship ||
-  !dateOfBirth ||
-  !goal
-) {
-  showError("Please complete all required fields.");
-  return;
-      }
+  // Legacy Plan information
+  const beneficiary =
+    document.getElementById("regBeneficiary").value.trim();
+  const relationship =
+    document.getElementById("regRelationship").value;
+  const dateOfBirth =
+    document.getElementById("regDob").value;
+  const goal =
+    document.getElementById("regGoal").value;
 
-      if (!termsChecked) {
-        showError("Please accept the Terms & Privacy to continue.");
-        return;
-      }
+  const termsChecked =
+    document.getElementById("regTerms").checked;
 
-      if (password.length < 6) {
-        showError("Use a password with at least 6 characters for this demo.");
-        return;
-      }
+  // ===== VALIDATION =====
 
-      if (password !== confirmPassword) {
-        showError("Passwords don’t match. Please double-check and try again.");
-        return;
-      }
+  if (
+    !name ||
+    !email ||
+    !password ||
+    !confirmPassword ||
+    !beneficiary ||
+    !relationship ||
+    !dateOfBirth ||
+    !goal
+  ) {
+    showError("Please complete all required fields.");
+    return;
+  }
 
-      const existing = findUserByEmail(email);
-      if (existing) {
-        showError("An account already exists with that email. Try signing in instead.");
-        return;
-      }
+  if (!termsChecked) {
+    showError("Please accept the Terms & Privacy to continue.");
+    return;
+  }
 
-      const users = getUsers();
-      const newUser = {
-        id: Date.now().toString(),
-        name,
-        role,
-        email,
-        password 
-      };
+  if (password.length < 6) {
+    showError(
+      "Use a password with at least 6 characters for this demo."
+    );
+    return;
+  }
 
-      users.push(newUser);
-      saveUsers(users);
+  if (password !== confirmPassword) {
+    showError(
+      "Passwords don’t match. Please double-check and try again."
+    );
+    return;
+  }
 
-      // Store current session 
-      sessionStorage.setItem(
-  "legacyLinkCurrentUser",
-  JSON.stringify({
-    id: newUser.id,
-    name: newUser.name,
-    email: newUser.email,
-    role: newUser.role,
-    legacyPlan: newUser.legacyPlan
-  })
-);
+  // Check whether account already exists
+  const existing = findUserByEmail(email);
 
-      // mark as fresh signup for onboarding
-      sessionStorage.setItem("legacyLinkIsFresh", "1");
+  if (existing) {
+    showError(
+      "An account already exists with that email. Try signing in instead."
+    );
+    return;
+  }
 
-      window.location.href = REDIRECT_URL;
-    });
+  // ===== CREATE USER =====
+
+  const users = getUsers();
+
+  const newUser = {
+    id: Date.now().toString(),
+    name: name,
+    role: role,
+    email: email,
+    password: password,
+
+    legacyPlan: {
+      beneficiary: beneficiary,
+      relationship: relationship,
+      dateOfBirth: dateOfBirth,
+      goal: goal
+    }
+  };
+
+  // Save user
+  users.push(newUser);
+  saveUsers(users);
+
+  // ===== CREATE CURRENT SESSION =====
+
+  sessionStorage.setItem(
+    "legacyLinkCurrentUser",
+    JSON.stringify({
+      id: newUser.id,
+      name: newUser.name,
+      email: newUser.email,
+      role: newUser.role,
+      legacyPlan: newUser.legacyPlan
+    })
+  );
+
+  // Mark as a fresh signup
+  sessionStorage.setItem("legacyLinkIsFresh", "1");
+
+  // ===== GO TO DASHBOARD =====
+  window.location.href = REDIRECT_URL;
+});
 
     // ===== LOGIN FLOW =====
     loginForm.addEventListener("submit", (event) => {
