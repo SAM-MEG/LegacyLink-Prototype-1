@@ -264,3 +264,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+// ===== LOAD LEGACY PLAN DATA =====
+const currentUser = JSON.parse(
+  sessionStorage.getItem("legacyLinkCurrentUser")
+);
+
+if (currentUser && currentUser.legacyPlan) {
+  const beneficiaryName =
+    document.getElementById("beneficiaryName");
+
+  if (beneficiaryName) {
+    beneficiaryName.textContent =
+      currentUser.legacyPlan.beneficiary;
+  }
+}
