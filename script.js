@@ -273,8 +273,16 @@ if (currentUser && currentUser.legacyPlan) {
   const beneficiaryName =
     document.getElementById("beneficiaryName");
 
+  const legacyGoal =
+    document.getElementById("legacyGoal");
+
   if (beneficiaryName) {
     beneficiaryName.textContent =
       currentUser.legacyPlan.beneficiary;
+  }
+
+  if (legacyGoal) {
+    legacyGoal.textContent =
+      currentUser.legacyPlan.goal;
   }
 }
