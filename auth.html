@@ -1034,14 +1034,15 @@
 
       // Store current session 
       sessionStorage.setItem(
-        "legacyLinkCurrentUser",
-        JSON.stringify({
-          id: newUser.id,
-          name: newUser.name,
-          email: newUser.email,
-          role: newUser.role
-        })
-      );
+  "legacyLinkCurrentUser",
+  JSON.stringify({
+    id: newUser.id,
+    name: newUser.name,
+    email: newUser.email,
+    role: newUser.role,
+    legacyPlan: newUser.legacyPlan
+  })
+);
 
       // mark as fresh signup for onboarding
       sessionStorage.setItem("legacyLinkIsFresh", "1");
