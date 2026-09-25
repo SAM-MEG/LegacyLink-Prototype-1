@@ -985,9 +985,18 @@
       const confirmPassword = document.getElementById("regPasswordConfirm").value;
       const termsChecked = document.getElementById("regTerms").checked;
 
-      if (!name || !email || !password || !confirmPassword) {
-        showError("Please fill in all required fields.");
-        return;
+      if (
+  !name ||
+  !email ||
+  !password ||
+  !confirmPassword ||
+  !beneficiary ||
+  !relationship ||
+  !dateOfBirth ||
+  !goal
+) {
+  showError("Please complete all required fields.");
+  return;
       }
 
       if (!termsChecked) {
@@ -1017,7 +1026,7 @@
         name,
         role,
         email,
-        password // NOTE: plain text only for this prototype.
+        password 
       };
 
       users.push(newUser);
